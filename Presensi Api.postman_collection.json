@@ -1,0 +1,195 @@
+{
+	"info": {
+		"_postman_id": "29b774a0-ab21-4ae4-96a6-2ac568ca8192",
+		"name": "Presensi Api",
+		"description": "**Dokumentasi API aplikasi Presesnsi plus**",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "33948438",
+		"_collection_link": "https://universal-comet-560768.postman.co/workspace/11510585-253a-4222-a108-48fe9bf38c65/collection/33948438-29b774a0-ab21-4ae4-96a6-2ac568ca8192?action=share&source=collection_link&creator=33948438"
+	},
+	"item": [
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"emailOrUsername\": \"dedektegar\",\r\n    \"password\": \"password\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/account/login",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"account",
+								"login"
+							]
+						},
+						"description": "Endpoint ini digunakan untuk melakukan login, response yang akan dihaslkan berupa **token**. Parameter body yang dibutuhkan adalah sebagai berikut:"
+					},
+					"response": []
+				}
+			],
+			"description": "Autentikasi pada aplikasi ini menggunakan metode JWT _(JSON Web Token)._ Setelah autentikasi berhasil akan diberikan token yang akan digunakan pada setiap request yang membutuhkan otorisasi pengguna"
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "getUserData",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/api/v1/user",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user"
+							]
+						},
+						"description": "Endpoint ini digunakan untuk mengambil data pengguna yang login sebelumnya _**(authenticated user).**_ endpoint ini membutuhkan otoritas pengguna sehingga diwajibkan menambahkan _**Request Headers.**_\n\n- Headers\n    - Key : **Authorization**\n    - Value : **bearer {token}**"
+					},
+					"response": []
+				},
+				{
+					"name": "checkin",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "username",
+									"value": "dedektegar",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "email",
+									"value": "cahyo@gmail.com",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "name",
+									"value": "Cahyono anak keren banget",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "work",
+									"value": "Mahasiswa senior",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "phone",
+									"value": "0895607595999",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "avatar",
+									"type": "file",
+									"src": "/C:/Users/ASUS/Downloads/png-clipart-computer-icons-avatar-icon-design-avatar-heroes-computer-wallpaper-thumbnail.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/attendance/checkin",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"attendance",
+								"checkin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "checkout",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"checkOutTime\": \"2025-01-06\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/attendance/checkout",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"attendance",
+								"checkout"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Endpoint _user_ berisi API yang berkaitan dengan pengguna"
+		}
+	],
+	"variable": [
+		{
+			"key": " BASE_URL ",
+			"value": "https://enviro-api-nu.vercel.app"
+		}
+	]
+}
